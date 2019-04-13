@@ -8,6 +8,6 @@ setup(
     install_requires=["click"],
     entry_points="""
         [console_scripts]
-        tanner_to_eldo=tanner_to_eldo.tanner_to_eldo:cli
+        tanner_to_eldo=tanner_to_eldo.cli:cli
     """,
 )
