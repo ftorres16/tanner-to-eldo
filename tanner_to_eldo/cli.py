@@ -15,7 +15,12 @@ def cli(input, output):
     output.write(f"{80 * '*'}\n")
 
     for line in input.readlines():
-        if "$" in line:
+        if line[0] == "*":
+            # Don't process commented lines
+            pass
+
+        elif "$" in line:
+            # remove unsupported comments
             line = f"{line.split('$')[0]}\n"
 
         elif ".probe" in line:
