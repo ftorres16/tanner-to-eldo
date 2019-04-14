@@ -4,7 +4,9 @@ import click
 @click.command()
 @click.argument("input", type=click.File("r"))
 @click.argument("output", type=click.File("w"))
-def cli(input, output):
+@click.option("--pdk", type=click.Path(), envvar="CONVERTER_PDK")
+@click.option("--pdk-options", envvar="CONVERTER_PDK_OPTIONS")
+def cli(input, output, pdk, pdk_options):
     """
     This script converts from tanner to eldo spice format.
 
@@ -13,6 +15,9 @@ def cli(input, output):
     output.write(f"{80 * '*'}\n")
     output.write("* Converted using tanner_to_eldo.\n")
     output.write(f"{80 * '*'}\n")
+
+    if pdk:
+        output.write(f".lib \"{pdk}\" {pdk_options or ''}\n")
 
     for line in input.readlines():
         if line[0] == "*":
