@@ -19,6 +19,9 @@ def cli(input, output, pdk, pdk_options):
     if pdk:
         output.write(f".lib \"{pdk}\" {pdk_options or ''}\n")
 
+    # Short 0 node with gnd node
+    output.write("v_gnd 0 gnd 0\n")
+
     for line in input.readlines():
         if line[0] == "*":
             # Don't process commented lines
