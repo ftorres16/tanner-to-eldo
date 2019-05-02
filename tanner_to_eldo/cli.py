@@ -21,6 +21,7 @@ def cli(input, output, pdk, pdk_options):
 
     # Short 0 node with gnd node
     output.write("v_gnd 0 gnd 0\n")
+    params = []
 
     for line in input.readlines():
         if line[0] == "*":
@@ -33,8 +34,19 @@ def cli(input, output, pdk, pdk_options):
 
         elif ".probe" in line:
             line = ".option probe\n.option post\n"
+
         elif ".option probe" in line:
             line = ""
+
+        elif ".param" in line:
+            params.append(line.split()[1])
+
+        elif ".dc" == line[:3]:
+            _, sweep_object, start, end, n_points = line.split()
+            if sweep_object in params:
+                sweep_object = f"param {sweep_object}"
+            step = (float(end) - float(start)) / (float(n_points) - 1)
+            line = f".dc {sweep_object} {start} {end} {step}"
 
         output.write(line)
 
