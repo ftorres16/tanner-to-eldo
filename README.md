@@ -24,5 +24,5 @@ For example, if you want to include the typical means (`tm`) case for a library 
 
 If you find this repo useful, there's a good chance you may want to check some of my other related work as well.
 
-- [tannner_to_eldo](https://github.com/ftorres16/tanner_to_eldo) can transform Tanner generated SPICE netlists into ELDO compatible ones.
-- [plot_eldo_sims](https://github.com/ftorres16/plot_eldo_sims) can plot the JSON output of this command using Python's matlplotlib.
+- [chi_to_json](https://github.com/ftorres16/chi_to_json) extracts the simulation data form an ELDO `chi` output file and writes it into an easier to handle JSON format.
+- [plot_eldo_sims](https://github.com/ftorres16/plot_eldo_sims) can plot the JSON output of `chi_to_json` command using Python's matlplotlib.
