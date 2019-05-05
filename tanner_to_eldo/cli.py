@@ -24,7 +24,7 @@ def cli(input, output, pdk, pdk_options):
     params = []
 
     for line in input.readlines():
-        if line[0] == "*":
+        if line.sartswith("*"):
             # Don't process commented lines
             pass
 
@@ -32,16 +32,16 @@ def cli(input, output, pdk, pdk_options):
             # remove unsupported comments
             line = f"{line.split('$')[0]}\n"
 
-        elif ".probe" in line:
+        elif line.startswith(".probe"):
             line = ".option probe\n.option post\n"
 
-        elif ".option probe" in line:
+        elif line.startswith(".option probe"):
             line = ""
 
-        elif ".param" in line:
+        elif line.startswith(".param"):
             params.append(line.split()[1])
 
-        elif ".dc" == line[:3]:
+        elif line.startswith(".dc"):
             _, sweep_object, start, end, n_points = line.split()
             if sweep_object in params:
                 sweep_object = f"param {sweep_object}"
